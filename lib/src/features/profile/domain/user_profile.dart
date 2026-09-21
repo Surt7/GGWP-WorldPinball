@@ -1,9 +1,11 @@
 import 'package:equatable/equatable.dart';
 
+/// Represents a User's profile information.
+/// Uses Equatable for easy object comparison.
 class UserProfile extends Equatable {
   final String userId;
   final String displayName;
-  final String? avatarUrl;
+  final String? avatarUrl; // Nullable field
   final String countryCode;
   final bool isProfilePublic;
 
@@ -16,5 +18,12 @@ class UserProfile extends Equatable {
   });
 
   @override
-  List<Object?> get props => [userId, displayName, avatarUrl, countryCode, isProfilePublic];
+  // Props list used by Equatable to determine equality.
+  List<Object?> get props => [
+        userId,
+        displayName,
+        avatarUrl,
+        countryCode,
+        isProfilePublic,
+      ];
 }

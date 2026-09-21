@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import '../domain/machine.dart';
 
+/// Base class for all Machine-related states.
+/// States are "Outputs" from the BLoC.
 abstract class MachinesState extends Equatable {
   const MachinesState();
 
@@ -8,13 +10,13 @@ abstract class MachinesState extends Equatable {
   List<Object> get props => [];
 }
 
-// État initial (quand rien n'a commencé)
+/// Initial state: nothing has happened yet.
 class MachinesInitial extends MachinesState {}
 
-// État pendant le chargement (on affichera un spinner)
+/// Loading state: the app is fetching data (show a spinner).
 class MachinesLoading extends MachinesState {}
 
-// État quand les données sont chargées avec succès
+/// Success state: data loaded successfully.
 class MachinesLoaded extends MachinesState {
   final List<Machine> machines;
 
@@ -24,7 +26,7 @@ class MachinesLoaded extends MachinesState {
   List<Object> get props => [machines];
 }
 
-// État en cas d'erreur
+/// Error state: something went wrong.
 class MachinesError extends MachinesState {
   final String message;
 
