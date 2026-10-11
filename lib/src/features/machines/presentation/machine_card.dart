@@ -3,11 +3,13 @@ import '../domain/machine.dart';
 
 class MachineCard extends StatelessWidget {
   final Machine machine;
-
   const MachineCard({super.key, required this.machine});
 
   @override
   Widget build(BuildContext context) {
+
+  bool isOnline = machine.status == 'Online';
+
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       clipBehavior: Clip.antiAlias, // Content won't bleed out of rounded corners
@@ -27,13 +29,26 @@ class MachineCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      machine.manufacturer.toUpperCase(),
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12,
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          machine.manufacturer.toUpperCase(),
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Container(
+                          width: 8,
+                          height: 8,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: isOnline ? Colors.green : Colors.red,
+                          ),
+                        )
+                      ],
                     ),
                     const SizedBox(height: 4),
                     Text(
@@ -43,8 +58,6 @@ class MachineCard extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 4),
-                    Text('SN: ${machine.serialNumber}'),
                   ],
                 ),
               ),
@@ -55,3 +68,4 @@ class MachineCard extends StatelessWidget {
     );
   }
 }
+

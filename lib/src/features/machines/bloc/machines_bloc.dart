@@ -3,32 +3,35 @@ import '../data/machine_repository.dart';
 import 'machines_event.dart';
 import 'machines_state.dart';
 
+/// The 'Brain' of the Machines feature.
+/// It converts [MachinesEvent] into [MachinesState].
 class MachinesBloc extends Bloc<MachinesEvent, MachinesState> {
   final MachineRepository _machineRepository;
 
-  // On initialise avec l'état "Initial"
+  // Initialize with the 'Initial' state.
   MachinesBloc(this._machineRepository) : super(MachinesInitial()) {
-
-    // On enregistre le "handler" pour l'événement de chargement
+    // Register the event handler for loading machines.
     on<LoadMachinesEvent>(_onLoadMachines);
   }
 
+  /// Handler for the [LoadMachinesEvent].
+  /// This is where the business logic resides.
   Future<void> _onLoadMachines(
-      LoadMachinesEvent event,
-      Emitter<MachinesState> emit,
-      ) async {
-    // 1. On dit à l'UI qu'on charge
+    LoadMachinesEvent event,
+    Emitter<MachinesState> emit,
+  ) async {
+    // 1. Tell the UI to show a loading indicator.
     emit(MachinesLoading());
 
     try {
-      // 2. On appelle le repository (ton "Service" en C#)
+      // 2. Fetch data from the repository (similar to a Service in C#).
       final machines = await _machineRepository.getMachines();
 
-      // 3. On envoie l'état de succès avec les données
+      // 3. Emit the success state with the retrieved data.
       emit(MachinesLoaded(machines));
     } catch (e) {
-      // 4. En cas d'erreur, on envoie l'état d'erreur
-      emit(MachinesError("Impossible de charger les machines : $e"));
+      // 4. Emit an error state if something goes wrong.
+      emit(MachinesError("Failed to load machines: $e"));
     }
   }
 }

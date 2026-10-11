@@ -1,10 +1,15 @@
 import '../domain/machine.dart';
 
+/// Repository responsible for fetching Machine data.
+/// This acts as an abstraction layer between the BLoC and the Data Source (API/Local DB).
 class MachineRepository {
-  Future<List<Machine>> getMachines() async{
+  /// Fetches the list of pinball machines.
+  /// Currently using mocked data with a simulated network delay.
+  Future<List<Machine>> getMachines() async {
+    // Simulate a network delay (1 second).
     await Future.delayed(const Duration(seconds: 1));
 
-    return  [
+    return [
       Machine(
         machineId: '1',
         ipId: 're-death-island',
