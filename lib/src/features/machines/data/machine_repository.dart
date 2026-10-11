@@ -15,7 +15,7 @@ class MachineRepository {
         ipId: 're-death-island',
         displayName: 'Resident Evil: Death Island',
         serialNumber: 'SN-RE-001',
-        manufacturer: 'Stern Pinball',
+        manufacturer: 'WorldPinball',
         status: 'Online',
         registeredAt: DateTime.now(),
       ),
@@ -25,7 +25,7 @@ class MachineRepository {
         displayName: 'Godzilla Premium',
         serialNumber: 'SN-GZ-042',
         manufacturer: 'Stern Pinball',
-        status: 'Online',
+        status: 'Offline',
         registeredAt: DateTime.now(),
       ),
     ];
